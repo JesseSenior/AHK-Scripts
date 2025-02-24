@@ -65,7 +65,7 @@ if !FileExist(Settings.EverythingPath) {
 ; Browser
 XButton2 & c::
 RControl & c:: Run Settings.BrowserPath
-if !FileExist(Settings.EverythingPath) {
+if !FileExist(Settings.BrowserPath) {
     Hotkey("XButton2 & c", "Off")
     Hotkey("RControl & c", "Off")
 }

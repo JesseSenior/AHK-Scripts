@@ -6,7 +6,7 @@ Note   : 配置文件解析.
 */
 #Requires AutoHotkey v2.0
 
-SettingsFilePath := "%A_ScriptDir%/Settings.ini"
+SettingsFilePath := A_ScriptDir "/Settings.ini"
 Settings := []
 
 Settings.VSCodePath := IniRead(SettingsFilePath, "Settings", "VSCodePath", "C:\Users\" A_UserName "\AppData\Local\Programs\Microsoft VS Code\Code.exe")
