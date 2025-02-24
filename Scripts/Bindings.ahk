@@ -30,6 +30,8 @@ CapsLock::
     if (WinExist("ahk_class ^ATL:.*$"))
         Send("{Enter}")
     SetTitleMatchMode 2
+    if (WinExist("ahk_exe iFlyInput.exe"))
+        Send("{Enter}")
 
     KeyWait("CapsLock")
     if (A_TimeSinceThisHotkey > 500)
