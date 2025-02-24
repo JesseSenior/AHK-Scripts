@@ -11,7 +11,7 @@ XButton1 & e::
 Edit_(hk := 0)
 {
     ;Edit
-    if FileExist(Settings.ZoteroPath)
+    if FileExist(Settings.VSCodePath)
         vscodepath := Settings.VSCodePath . " " . A_ScriptDir
     else
         vscodepath := "explorer.exe " . A_ScriptDir
