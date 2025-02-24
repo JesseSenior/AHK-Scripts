@@ -30,7 +30,7 @@ CenterWindow(WinTitle)
     ; 恢复窗口避免最大化状态影响
     try WinRestore(WinTitle)
 
-    noRescaleProcessName := ["explorer.exe", "WindowsTerminal.exe"]
+    noRescaleProcessName := ["explorer.exe", "WindowsTerminal.exe", "KeePass.exe"]
 
     ; 根据进程类型设置不同尺寸
     if HasVal(noRescaleProcessName, processName)
