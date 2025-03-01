@@ -25,13 +25,15 @@ CapsLock::
     IMEState := getIMEState()
     BlockInput 'On'
 
-    ; 检测rime是否有内容
-    SetTitleMatchMode "RegEx"
-    if (WinExist("ahk_class ^ATL:.*$"))
-        Send("{Enter}")
-    SetTitleMatchMode 2
+    ; 检测输入法是否有内容
     if (WinExist("ahk_exe iFlyInput.exe"))
         Send("{Enter}")
+    else {
+        SetTitleMatchMode "RegEx"
+        if (WinExist("ahk_class ^ATL:.*$"))
+            Send("{Enter}")
+        SetTitleMatchMode 2
+    }
 
     KeyWait("CapsLock")
     if (A_TimeSinceThisHotkey > 500)
@@ -44,6 +46,7 @@ CapsLock::
 
         SetCapsLockState "Off"
     }
+    Sleep(50)
     BlockInput 'Off'
 }
 
