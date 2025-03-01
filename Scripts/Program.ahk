@@ -70,6 +70,14 @@ if !FileExist(Settings.BrowserPath) {
     Hotkey("RControl & c", "Off")
 }
 
+; Joplin
+XButton2 & g::
+RControl & g:: Run Settings.JoplinPath
+if !FileExist(Settings.JoplinPath) {
+    Hotkey("XButton2 & g", "Off")
+    Hotkey("RControl & g", "Off")
+}
+
 ; Microsoft Visual Studio Code
 XButton2 & v::
 RControl & v:: Run Settings.VSCodePath
