@@ -7,10 +7,12 @@ Note   : 键盘/鼠标映射.
 #Requires AutoHotkey v2.0
 #Include IncludeCommon.ahk
 
-#HotIf WinActive("ahk_exe vmconnect.exe")
+; 防止快捷键在宿主机被拦截
+#HotIf WinActive("ahk_exe vmconnect.exe") or WinActive("ahk_exe mstsc.exe")
 CapsLock:: return
 ~XButton1:: return
 ~XButton2:: return
+~RControl:: return
 #HotIf
 
 ; 使用CapsLock来切换中英文（长按）
@@ -18,7 +20,9 @@ CapsLock::
 {
     ;MsgBox  "Triggered!"
 
-    if (WinActive("ahk_exe vmconnect.exe")) ; 忽略启用虚拟机时的调用
+    ; if (WinActive("ahk_exe vmconnect.exe")) ; 忽略启用虚拟机时的调用
+    ;     return
+    if (WinActive("ahk_exe osu!.exe"))
         return
 
     capsState := GetKeyState("CapsLock", "T")
