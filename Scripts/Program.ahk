@@ -70,10 +70,10 @@ if !FileExist(Settings.BrowserPath) {
     Hotkey("RControl & c", "Off")
 }
 
-; Joplin
+; Obsidian
 XButton2 & g::
-RControl & g:: Run Settings.JoplinPath
-if !FileExist(Settings.JoplinPath) {
+RControl & g:: Run Settings.ObsidianPath
+if !FileExist(Settings.ObsidianPath) {
     Hotkey("XButton2 & g", "Off")
     Hotkey("RControl & g", "Off")
 }
