@@ -8,7 +8,12 @@ Note   : 键盘/鼠标映射.
 #Include IncludeCommon.ahk
 
 ; 防止快捷键在宿主机被拦截
-#HotIf WinActive("ahk_exe vmconnect.exe") or WinActive("ahk_exe mstsc.exe")
+#HotIf WinActive("ahk_exe vmconnect.exe")
+CapsLock:: return
+~XButton1:: return
+~XButton2:: return
+~RControl:: return
+#HotIf WinActive("ahk_exe mstsc.exe")
 CapsLock:: return
 ~XButton1:: return
 ~XButton2:: return
@@ -30,14 +35,14 @@ CapsLock::
     BlockInput 'On'
 
     ; 检测输入法是否有内容
-    if (WinExist("ahk_exe iFlyInput.exe"))
+    if (WinExist("ahk_exe iFlyInput.exe") or WinExist("ahk_class BaseGui"))
         Send("{Enter}")
-    else {
-        SetTitleMatchMode "RegEx"
-        if (WinExist("ahk_class ^ATL:.*$"))
-            Send("{Enter}")
-        SetTitleMatchMode 2
-    }
+    ;else {
+    ;    SetTitleMatchMode "RegEx"
+    ;    if (WinExist("ahk_class ^ATL:.*$"))
+    ;        Send("{Enter}")
+    ;    SetTitleMatchMode 2
+    ;}
 
     KeyWait("CapsLock")
     if (A_TimeSinceThisHotkey > 500)
