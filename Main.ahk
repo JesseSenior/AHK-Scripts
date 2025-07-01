@@ -25,3 +25,4 @@ SetNumLockState True
 #Include Scripts/AHKManage.ahk
 #Include Scripts/Bindings.ahk
 #Include Scripts/Program.ahk
+#Include Scripts/Scheduler.ahk
