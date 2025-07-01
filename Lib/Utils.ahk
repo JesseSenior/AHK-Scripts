@@ -16,7 +16,7 @@ MoveCursor(key) {
     Send key
 }
 
-CenterWindow(WinTitle)
+CenterWindow(WinTitle, NormalWidthRatio, NormalHeightRatio)
 {
     ; 获取窗口对应的进程名称
     if (WinTitle = "A") {
@@ -30,15 +30,27 @@ CenterWindow(WinTitle)
     ; 恢复窗口避免最大化状态影响
     try WinRestore(WinTitle)
 
-    noRescaleProcessName := ["explorer.exe", "WindowsTerminal.exe", "KeePass.exe", "Obsidian.exe"]
+    ; 忽略特定窗口尺寸调整
+    noRescaleProcessName := [
+        "explorer.exe",
+        "WindowsTerminal.exe",
+        "KeePass.exe",
+        "Obsidian.exe",
+        "cloudmusic.exe",
+        "MAA.exe"
+    ]
 
     ; 根据进程类型设置不同尺寸
     if HasVal(noRescaleProcessName, processName)
         WinGetPos(, , &Width, &Height, WinTitle)
     else {
-        Width := A_ScreenWidth // 3 * 2  ; 默认宽度：屏幕2/3
-        Height := A_ScreenHeight // 4 * 3 ; 默认高度：屏幕3/4
+        ; Width := A_ScreenWidth // 3 * 2  ; 默认宽度：屏幕2/3
+        ; Height := A_ScreenHeight // 4 * 3 ; 默认高度：屏幕3/4
+        Width := Min(Max(A_ScreenWidth * NormalWidthRatio, 960), A_ScreenWidth)
+        Height := Min(Width * NormalHeightRatio, A_ScreenHeight)
     }
+    Width := Integer(Width)
+    Height := Integer(Height)
 
     ; 计算居中坐标
     xPos := (A_ScreenWidth - Width) // 2

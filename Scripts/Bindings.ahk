@@ -151,7 +151,7 @@ RControl & t:: WinSetAlwaysOnTop -1, "A"
 
 ; 居中窗口
 XButton2 & r::
-RControl & r:: CenterWindow("A")
+RControl & r:: CenterWindow("A", Settings.NormalWidthRatio, Settings.NormalHeightRatio)
 
 ; Minecraft 自动放屁
 global mc_shift_flat := false
