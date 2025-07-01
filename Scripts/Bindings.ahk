@@ -8,54 +8,46 @@ Note   : 键盘/鼠标映射.
 #Include IncludeCommon.ahk
 
 ; 防止快捷键在宿主机被拦截
-#HotIf WinActive("ahk_exe vmconnect.exe")
+#HotIf WinActive("ahk_group RemoteAccess")
 CapsLock:: return
 ~XButton1:: return
 ~XButton2:: return
 ~RControl:: return
-#HotIf WinActive("ahk_exe mstsc.exe")
-CapsLock:: return
-~XButton1:: return
-~XButton2:: return
-~RControl:: return
-#HotIf
 
+#HotIf not WinActive("ahk_group RemoteAccess")
 ; 使用CapsLock来切换中英文（长按）
 CapsLock::
 {
-    ;MsgBox  "Triggered!"
-
-    ; if (WinActive("ahk_exe vmconnect.exe")) ; 忽略启用虚拟机时的调用
-    ;     return
-    if (WinActive("ahk_exe osu!.exe"))
+    if WinActive("ahk_exe osu!.exe") ; 忽略部分应用
         return
 
     capsState := GetKeyState("CapsLock", "T")
     IMEState := getIMEState()
     BlockInput 'On'
 
-    ; 检测输入法是否有内容
-    if (WinExist("ahk_exe iFlyInput.exe") or WinExist("ahk_class BaseGui"))
-        Send("{Enter}")
-    ;else {
-    ;    SetTitleMatchMode "RegEx"
-    ;    if (WinExist("ahk_class ^ATL:.*$"))
-    ;        Send("{Enter}")
-    ;    SetTitleMatchMode 2
-    ;}
+    ; 检测输入法是否有内容，并自动上屏
+    try {
+        ; 讯飞输入法 或 小狼毫
+        if (WinExist("ahk_exe iFlyInput.exe") or WinExist("ahk_class BaseGui"))
+            Send("{Enter}")
+        ; 微软输入法
+        else if WinExist("ahk_class Microsoft.IME.UIManager.CandidateWindow.Host")
+            Send("{Enter}")
+        else if ControlGetVisible("Windows 输入体验", "ahk_exe explorer.exe")
+            Send("{Enter}")
+    }
 
     KeyWait("CapsLock")
-    if (A_TimeSinceThisHotkey > 500)
-        SetCapsLockState IMEState = 0 and capsState = 0 ? "On" : "Off"
-    else {
-        ; toIME(-1)
-        Send("{Alt down}{Shift down}")
-        Sleep(50)
-        Send("{Alt up}{Shift up}")
-
+    if A_TimeSinceThisHotkey > 500 and IMEState = 0 ; 长按+英文模式才切换大小写
+        SetCapsLockState capsState = 0 ? "On" : "Off"
+    else { ; 否则自动切换中英文并强制关闭大小写
         SetCapsLockState "Off"
+
+        Send("{Alt down}{Shift down}")
+        Sleep(30)
+        Send("{Alt up}{Shift up}")
     }
-    Sleep(50)
+    Sleep(30)
     BlockInput 'Off'
 }
 
@@ -156,7 +148,7 @@ RControl & r:: CenterWindow("A", Settings.NormalWidthRatio, Settings.NormalHeigh
 ; Minecraft 自动放屁
 global mc_shift_flat := false
 
-#HotIf WinActive("Minecraft 1.12.2")
+#HotIf not WinActive("ahk_group RemoteAccess") and WinActive("Minecraft 1.12.2")
 XButton2 & f:: {
     global mc_shift_flat
     mc_shift_flat := !mc_shift_flat  ; 反转状态变量

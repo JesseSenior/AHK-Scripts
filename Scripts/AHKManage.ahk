@@ -7,6 +7,7 @@ Note   : 脚本管理热键.
 #Requires AutoHotkey v2.0
 #Include IncludeCommon.ahk
 
+#HotIf not WinActive("ahk_group RemoteAccess")
 XButton1 & e::
 Edit_(hk := 0)
 {
@@ -31,8 +32,7 @@ ToggleTrayIcon(hk := 0)
     A_IconHidden := Not A_IconHidden
 }
 
-#HotIf GetKeyState("RControl")
+#HotIf GetKeyState("RControl") and not WinActive("ahk_group RemoteAccess")
 RAlt & e:: Edit_()
 RAlt & r:: Reload_()
 RAlt & a:: ToggleTrayIcon()
-#HotIf

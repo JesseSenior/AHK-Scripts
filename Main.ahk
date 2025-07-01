@@ -22,6 +22,11 @@ SetNumLockState True
 
 ;Pause::Pause -1
 
+; 特定组下屏蔽指令
+GroupAdd "RemoteAccess", "ahk_exe mstsc.exe"
+GroupAdd "RemoteAccess", "ahk_exe vmconnect.exe"
+; #HotIf not WinActive("ahk_group RemoteAccess")
+
 #Include Scripts/AHKManage.ahk
 #Include Scripts/Bindings.ahk
 #Include Scripts/Program.ahk

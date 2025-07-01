@@ -7,10 +7,12 @@ Note   : 应用程序.
 #Requires AutoHotkey v2.0
 #Include IncludeCommon.ahk
 
+#HotIf not WinActive("ahk_group RemoteAccess")
 ; Keepass
 XButton2 & k::
 RControl & k:: Run Settings.KeePassPath
 if !FileExist(Settings.KeePassPath) {
+    HotIfWinNotActive("ahk_group RemoteAccess")
     Hotkey("XButton2 & k", "Off")
     Hotkey("RControl & k", "Off")
 }
@@ -37,6 +39,7 @@ XButton2 & a::
     }
 }
 if !FileExist(Settings.KeePassPath) {
+    HotIfWinNotActive("ahk_group RemoteAccess")
     Hotkey("^!a", "Off")
     Hotkey("XButton2 & a", "Off")
 }
@@ -58,6 +61,7 @@ RControl & s::
         WinActivate
 }
 if !FileExist(Settings.EverythingPath) {
+    HotIfWinNotActive("ahk_group RemoteAccess")
     Hotkey("XButton2 & s", "Off")
     Hotkey("RControl & s", "Off")
 }
@@ -66,6 +70,7 @@ if !FileExist(Settings.EverythingPath) {
 XButton2 & c::
 RControl & c:: Run Settings.BrowserPath
 if !FileExist(Settings.BrowserPath) {
+    HotIfWinNotActive("ahk_group RemoteAccess")
     Hotkey("XButton2 & c", "Off")
     Hotkey("RControl & c", "Off")
 }
@@ -74,6 +79,7 @@ if !FileExist(Settings.BrowserPath) {
 XButton2 & g::
 RControl & g:: Run Settings.ObsidianPath
 if !FileExist(Settings.ObsidianPath) {
+    HotIfWinNotActive("ahk_group RemoteAccess")
     Hotkey("XButton2 & g", "Off")
     Hotkey("RControl & g", "Off")
 }
@@ -82,6 +88,7 @@ if !FileExist(Settings.ObsidianPath) {
 XButton2 & v::
 RControl & v:: Run Settings.VSCodePath
 if !FileExist(Settings.VSCodePath) {
+    HotIfWinNotActive("ahk_group RemoteAccess")
     Hotkey("XButton2 & v", "Off")
     Hotkey("RControl & v", "Off")
 }
@@ -90,6 +97,7 @@ if !FileExist(Settings.VSCodePath) {
 XButton2 & z::
 RControl & z:: Run Settings.ZoteroPath
 if !FileExist(Settings.ZoteroPath) {
+    HotIfWinNotActive("ahk_group RemoteAccess")
     Hotkey("XButton2 & z", "Off")
     Hotkey("RControl & z", "Off")
 }
