@@ -42,12 +42,15 @@ CapsLock::
         SetCapsLockState capsState = 0 ? "On" : "Off"
     else { ; 否则自动切换中英文并强制关闭大小写
         SetCapsLockState "Off"
-
-        Send("{Alt down}{Shift down}")
         Sleep(30)
-        Send("{Alt up}{Shift up}")
+        Send("{Alt down}{Shift down}{Shift up}{Alt up}")
+
+        ; Send("{Alt down}{Shift down}")
+        ; Sleep(30)
+        ; Send("{Alt up}{Shift up}")
     }
     Sleep(30)
+    
     BlockInput 'Off'
 }
 

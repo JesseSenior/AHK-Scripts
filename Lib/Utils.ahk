@@ -37,7 +37,8 @@ CenterWindow(WinTitle, NormalWidthRatio, NormalHeightRatio)
         "KeePass.exe",
         "Obsidian.exe",
         "cloudmusic.exe",
-        "MAA.exe"
+        "MAA.exe",
+        "clash-verge.exe"
     ]
 
     ; 根据进程类型设置不同尺寸
@@ -57,7 +58,7 @@ CenterWindow(WinTitle, NormalWidthRatio, NormalHeightRatio)
     yPos := (A_ScreenHeight - Height) // 2
 
     ; 应用新位置和尺寸
-    WinMove(xPos, yPos, Width, Height, WinTitle)
+    try WinMove(xPos, yPos, Width, Height, WinTitle)
 }
 
 HasVal(haystack, needle) {
